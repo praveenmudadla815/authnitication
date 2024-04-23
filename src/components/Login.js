@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { TextField, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ userName: "", password: "" });
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handelChange = (e) => {
     const { name, value } = e.target;
@@ -14,6 +16,7 @@ const Login = () => {
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(formData, "formData");
+    login();
     navigate("/dashboard");
   };
   return (

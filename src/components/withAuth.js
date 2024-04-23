@@ -1,11 +1,12 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const withAuth = (DashBoard) => {
   const AuthRoute = (props) => {
-    const isAuthinticated = ap;
+    const isAuthinticated = useAuth();
     if (!isAuthinticated) {
-      return <Redirect to="/login" />;
+      return <Navigate to="/login" />;
     } else {
       return <DashBoard {...props} />;
     }
