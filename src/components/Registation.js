@@ -8,7 +8,9 @@ const Registation = () => {
     password: "",
     email: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -17,7 +19,15 @@ const Registation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("pk");
     console.log(formData, "formData");
+    if (!formData.userName || !formData.password || !formData.email) {
+      console.log("Please enter all fields");
+      setError("Please enter all fields");
+
+      return;
+    }
+    setError("");
     navigate("/login");
   };
   return (
@@ -36,7 +46,6 @@ const Registation = () => {
             variant="outlined"
             margin="normal"
             fullWidth
-            required
           />
           <TextField
             type="email"
@@ -47,7 +56,6 @@ const Registation = () => {
             variant="outlined"
             margin="normal"
             fullWidth
-            required
           />
           <TextField
             type="password"
@@ -58,8 +66,8 @@ const Registation = () => {
             variant="outlined"
             margin="normal"
             fullWidth
-            required
           />
+          {error && <Typography color="error">{error}</Typography>}
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Register
           </Button>
